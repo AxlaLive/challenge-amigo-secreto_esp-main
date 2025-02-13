@@ -1,15 +1,9 @@
 // Variables //
-
 let nombres = [];
-let input = document.getElementById("amigo");
 let listAmigos = document.getElementById("listaAmigos");
 let resultadoLista = document.getElementById("resultado");
-let agregarBoton = document.getElementById("agregarAmigo()");
-let seleccionarBoton = document.getElementById("sortearAmigo()");
 
-console.log(nombres);
-
-//Se agregan los nombres a la lista//
+//Se genera la lista//
 function agregarAmigo() {
     let nombre = document.getElementById("amigo").value.trim();
 
@@ -17,10 +11,11 @@ function agregarAmigo() {
         alert("Escribe un nombre");
         return;
     }
+//Se agregan los nombres ingresados al array//
     nombres.push(nombre);
     document.getElementById("amigo").value = "";
     enseñarAmigos();
-};
+}
 
 function enseñarAmigos(){
     let lista = document.getElementById("listaAmigos");
@@ -28,6 +23,27 @@ function enseñarAmigos(){
     for (let amigo of nombres){
         let li = document.createElement("li");
         li.textContent = amigo;
+//Nos enseña la lista de nombres ingresados//
         lista.appendChild(li);
     }
+}
+
+//Se sortea un nombre de la lista aleatoriamente//
+function sortearAmigo() {
+    if(nombres.length > 0){
+        let randomAmigo = Math.floor(Math.random()*nombres.length);
+        resultadoLista.textContent = `Selecionado: ${nombres[randomAmigo]}`;
+    } else {
+        resultadoLista.textContent = "No hay datos en la lista";
+    }
+}
+
+//Reiniciar el sorteo//
+function reiniciarSorteoDeAmigo(){
+//Reinicia el array//
+    nombres = [];
+//Reinicia los datos de la lista en HTML//
+    listAmigos.innerHTML = "";
+//Reinicia el resultado//
+    resultadoLista.textContent = "Seleccionado: ";
 }
