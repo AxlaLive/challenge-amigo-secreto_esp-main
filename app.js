@@ -1,25 +1,33 @@
 // Variables //
 
-const nombres = [];
-const input = document.getElementById("amigo");
-const listaAmigos = document.getElementById("listaAmigos");
-const resultadoLista = document.getElementById("resultado");
-const agregarBoton = document.getElementById("agregarAmigo()");
-const seleccionarBoton = document.getElementById("sortearAmigo()");
+let nombres = [];
+let input = document.getElementById("amigo");
+let listAmigos = document.getElementById("listaAmigos");
+let resultadoLista = document.getElementById("resultado");
+let agregarBoton = document.getElementById("agregarAmigo()");
+let seleccionarBoton = document.getElementById("sortearAmigo()");
 
-if (!input || !listaAmigos || !agregarBoton){
-    console.error("No se encontraron los elementos en el DOM");
-    return;
-}
+console.log(nombres);
+
 //Se agregan los nombres a la lista//
-agregarBoton.addEventListener ("click", function() {
-    let nombre = input.value.trim();
-    if (nombre !== "") {
-        let li =document.createElement("li");
-        li.textContent = nombre;
-        listaAmigos.appendChild(li);
-        input.value = "";
-    } else {
-        alert("Por favor, ingresa un nombre válido");
+function agregarAmigo() {
+    let nombre = document.getElementById("amigo").value.trim();
+
+    if (nombre === "") {
+        alert("Escribe un nombre");
+        return;
     }
-});
+    nombres.push(nombre);
+    document.getElementById("amigo").value = "";
+    enseñarAmigos();
+};
+
+function enseñarAmigos(){
+    let lista = document.getElementById("listaAmigos");
+    lista.innerHTML = "";
+    for (let amigo of nombres){
+        let li = document.createElement("li");
+        li.textContent = amigo;
+        lista.appendChild(li);
+    }
+}
